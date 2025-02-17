@@ -14,4 +14,4 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.REPO_2_TOKEN }}" \
           -H "Content-Type: application/json" \
           --data '{"ref":"main"}' \
-          "https://api.github.com/repos/jan-niklasml/playground/.github/workflows/updateVersions.yml/dispatches"
+          "https://api.github.com/repos/jan-niklasml/playground/actions/workflows/updateVersions.yml/dispatches"
