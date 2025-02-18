@@ -29,5 +29,5 @@ jobs:
           curl -X POST -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: Bearer ${{ secrets.REPO_2_TOKEN }}" \
           -H "Content-Type: application/json" \
-          --data '{"event_type": "trigger-event", "client_payload": {"image-version": ${{ inputs.image-version }}, "path-to-chart-yaml": ${{ inputs.path-to-chart-yaml }}, "path-to-backend-chart": ${{ inputs.path-to-backend-chart }}, "path-to-frontend-chart": ${{ inputs.path-to-frontend-chart }}}}' \
+          --data '{"event_type": "trigger-event", "client_payload": {"image-version": "${{ inputs.image-version }}", "path-to-chart-yaml": "${{ inputs.path-to-chart-yaml }}", "path-to-backend-chart": "${{ inputs.path-to-backend-chart }}", "path-to-frontend-chart": "${{ inputs.path-to-frontend-chart }}"}}' \
           "https://api.github.com/repos/jan-niklasml/playground/dispatches"
