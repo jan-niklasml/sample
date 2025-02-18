@@ -2,6 +2,22 @@ name: Trigger UpdateVersions Action in other Repo
 
 on:
   workflow_dispatch:
+    inputs:
+      image-version: 
+        description: "Version to set app-version to"
+        required: true
+      path-to-chart-yaml:
+        description: "Path to Chart.yaml"
+        required: true
+        default: Chart.yaml
+      path-to-backend-chart:
+        description: "Path to backend Chart.yaml"
+        required: true
+        default: charts/backend/Chart.yaml
+      path-to-frontend-chart:
+        description: "Path to frontend Chart.yaml"
+        required: true
+        default: charts/frontend/Chart.yaml
 
 jobs:
   build:
@@ -13,5 +29,5 @@ jobs:
           curl -X POST -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: Bearer ${{ secrets.REPO_2_TOKEN }}" \
           -H "Content-Type: application/json" \
-          --data '{"event_type": "trigger-event", "client_payload": {"image-version": "1.2.3", "path-to-chart-yaml": "charts/backend/Chart.yaml"}}' \
+          --data '{"event_type": "trigger-event", "client_payload": {"image-version": ${{ inputs.image-version }}, "path-to-chart-yaml": ${{ inputs.path-to-chart-yaml }}, "path-to-backend-chart": ${{ inputs.path-to-backend-chart }}, "path-to-frontend-chart": ${{ inputs.path-to-frontend-chart }}}}' \
           "https://api.github.com/repos/jan-niklasml/playground/dispatches"
