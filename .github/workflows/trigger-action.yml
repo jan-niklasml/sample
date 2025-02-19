@@ -4,15 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       app-version: 
-        description: "Version to set app-version to"
+        description: "New App-Version"
         required: true
       path-to-chart-yaml:
         description: "Path to Chart.yaml"
         required: true
-      path-to-parent-chart-yaml:
-        description: "Path to parent Chart.yaml"
-        required: true
-        default: Chart.yaml
 
 jobs:
   build:
@@ -24,5 +20,5 @@ jobs:
           curl -X POST -H "Accept: application/vnd.github.v3+json" \
           -H "Authorization: Bearer ${{ secrets.REPO_2_TOKEN }}" \
           -H "Content-Type: application/json" \
-          --data '{"event_type": "trigger-event", "client_payload": {"app-version": "${{ inputs.app-version }}", "path-to-chart-yaml": "${{ inputs.path-to-chart-yaml }}", "path-to-parent-chart-yaml": "${{ inputs.path-to-parent-chart-yaml }}"}}' \
+          --data '{"event_type": "trigger-event", "client_payload": {"app-version": "${{ inputs.app-version }}", "path-to-chart-yaml": "${{ inputs.path-to-chart-yaml }}"}}' \
           "https://api.github.com/repos/jan-niklasml/playground/dispatches"
