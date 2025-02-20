@@ -9,3 +9,18 @@ on:
       path-to-chart-yaml:
         description: "Path to Chart.yaml"
         required: true
+env:
+  REPO_2_TOKEN: ${{ secrets.REPO_2_TOKEN }}
+  REPO_2: "jan-niklasml/playground"
+  REPO_2_BRANCH: "jan-niklasml-patch-1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Call GitHub API to Trigger UpdateVersions Action
+        run: |
+          echo "${REPO_2_TOKEN}" | gh auth login --with-token
+          gh workflow run updateVersions.yml --ref REPO_2_BRANCH -f app-version=${{ inputs.app-version }} -f path-to-chart-yaml=${{ inputs.path-to-chart-yaml }} \
+          --repo $REPO_2
