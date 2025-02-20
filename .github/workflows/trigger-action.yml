@@ -10,7 +10,6 @@ on:
         description: "Path to Chart.yaml"
         required: true
 env:
-  GH_TOKEN: ${{ github.token }}
   REPO_2_TOKEN: ${{ secrets.REPO_2_TOKEN }}
 
 jobs:
