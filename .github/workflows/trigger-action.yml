@@ -1,0 +1,11 @@
+name: Trigger UpdateVersions Action in other Repo
+
+on:
+  workflow_dispatch:
+    inputs:
+      app-version: 
+        description: "New App-Version"
+        required: true
+      path-to-chart-yaml:
+        description: "Path to Chart.yaml"
+        required: true
