@@ -9,6 +9,8 @@ on:
       path-to-chart-yaml:
         description: "Path to Chart.yaml"
         required: true
+env:
+  GH_TOKEN: $github.token
 
 jobs:
   build:
