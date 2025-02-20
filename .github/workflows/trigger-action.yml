@@ -11,6 +11,8 @@ on:
         required: true
 env:
   REPO_2_TOKEN: ${{ secrets.REPO_2_TOKEN }}
+  REPO_2: "jan-niklasml/playground"
+  REPO_2_BRANCH: "jan-niklasml-patch-1"
 
 jobs:
   build:
@@ -20,5 +22,5 @@ jobs:
       - name: Call GitHub API to Trigger UpdateVersions Action
         run: |
           echo "${REPO_2_TOKEN}" | gh auth login --with-token
-          gh workflow run updateVersions.yml --ref jan-niklasml-patch-2 -f app-version=${{ inputs.app-version }} -f path-to-chart-yaml=${{ inputs.path-to-chart-yaml }} \
-          --repo jan-niklasml/playground
+          gh workflow run updateVersions.yml --ref REPO_2_BRANCH -f app-version=${{ inputs.app-version }} -f path-to-chart-yaml=${{ inputs.path-to-chart-yaml }} \
+          --repo $REPO_2
