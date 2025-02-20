@@ -17,8 +17,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Call GitHub API to Trigger UpdateVersions Action
         run: |
-          curl -X POST -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: Bearer ${{ secrets.REPO_2_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          --data '{"event_type": "trigger-event", "client_payload": {"app-version": "${{ inputs.app-version }}", "path-to-chart-yaml": "${{ inputs.path-to-chart-yaml }}"}}' \
-          "https://api.github.com/repos/jan-niklasml/playground/dispatches"
+          gh workflow run updateVersions.yml --ref jan-niklasml-patch-2 -f app-version=${{ inputs.app-version }} -f path-to-chart-yaml=${{ inputs.path-to-chart-yaml }} \
+          --repo jan-niklasml/playground
